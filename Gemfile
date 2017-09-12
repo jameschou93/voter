@@ -12,7 +12,13 @@ gem 'rails', '~> 5.1.3'
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
+# bootstrap
+gem 'bootstrap-sass'
+# jquery
+gem 'jquery-rails'
 # Use SCSS for stylesheets
+# makes ideas voteable
+gem 'acts_as_votable', '~> 0.10.0'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
