@@ -1,7 +1,10 @@
+<!-- Header  -->
 <h1>Ideas</h1>
+
+<!-- Idea Loop -->
 <% @ideas.each do |idea| %>
 <div class="well">
-  <p><%= idea.title %></p>
+  <h3><%= idea.title %></h3>
   <p><%= idea.description %></p>
   <%= link_to like_idea_path(idea), method: :put do %>
     Upvote
@@ -11,6 +14,11 @@
     Downvote
     <%= idea.get_downvotes.size %>
   <% end %>
+  <!-- #social media buttons -->
+  <%= social_share_button_tag("Share Me") %>
+
+  Posted by <%=idea.user.first_name %> <%= idea.user.last_name %>
+
   <a data-toggle="collapse" href="#collapse<%= idea.id %>">Comment</a>
   <%= idea.comments.size %>
   <div class="panel panel-default">
@@ -35,6 +43,7 @@
 
 </div>
 <% end %>
+<!-- Idea Loop End -->
 
 <% if current_user %>
 

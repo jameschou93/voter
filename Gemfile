@@ -14,11 +14,15 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 # bootstrap
 gem 'bootstrap-sass'
+# allows profile pictures to be uploaded and used
+gem "paperclip", "~> 5.0.0"
 # jquery
 gem 'jquery-rails'
-# Use SCSS for stylesheets
 # makes ideas voteable
 gem 'acts_as_votable', '~> 0.10.0'
+#add social media buttons
+gem 'social-share-button', '~> 0.1.6'
+# Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
-  resources :users, only: [:index, :update, :destroy]
+
 
   root to:'ideas#index'
+
+  get  "/page", to: 'pages#index'
 
   resources :ideas, only: [:index, :show, :create, :destroy, :new] do
     member do
