@@ -1,7 +1,7 @@
 class IdeasController < ApplicationController
 
   def index
-    @ideas = Idea.all
+    @ideas = Idea.all.sort_by { |idea| idea.get_downvotes.size - idea.get_upvotes.size}
   end
 
   def show
