@@ -1,40 +1,5 @@
+<!-- Header  -->
 <h1>Ideas</h1>
-<% @ideas.each do |idea| %>
-<div class="well">
-  <p><%= idea.title %></p>
-  <p><%= idea.description %></p>
-  <%= link_to like_idea_path(idea), method: :put do %>
-    Upvote
-    <%= idea.get_upvotes.size %>
-  <% end %>
-  <%= link_to dislike_idea_path(idea), method: :put do %>
-    Downvote
-    <%= idea.get_downvotes.size %>
-  <% end %>
-  <a data-toggle="collapse" href="#collapse<%= idea.id %>">Comment</a>
-  <%= idea.comments.size %>
-  <div class="panel panel-default">
-    <div id="collapse<%= idea.id %>" class="panel-collapse collapse">
-      <% idea.comments.each do |comment| %>
-        <div class="comment well">
-          <div class="user">
-            "<%= comment.user.first_name %> <%= comment.user.last_name %>"
-          </div>
-          <%= comment.comment %>
-        </div>
-      <% end %>
-      <%= form_tag "/comments", method: :post do %>
-        <input type="hidden" name="idea_id" value="<%= idea.id %>">
-        <input type="hidden" name="user_id" value="<%= current_user.id %>">
-        <textarea rows="4" cols="50" name="comment">
-        </textarea>
-        <input type="submit" value="Submit">
-       <% end %>
-    </div>
-  </div>
-
-</div>
-<% end %>
 
 <% if current_user %>
 
@@ -48,3 +13,48 @@
   <%end%>
 
 <% end %>
+
+
+<!-- Idea Loop -->
+<% @ideas.each do |idea| %>
+  <div class="well">
+    <h3><%= idea.title %></h3>
+    <p><%= idea.description %></p>
+    <%= link_to like_idea_path(idea), method: :put do %>
+      Upvote
+      <%= idea.get_upvotes.size %>
+    <% end %>
+    <%= link_to dislike_idea_path(idea), method: :put do %>
+      Downvote
+      <%= idea.get_downvotes.size %>
+    <% end %>
+
+    <%= social_share_button_tag("Share Me") %>
+
+
+    <a data-toggle="collapse" href="#collapse<%= idea.id %>">Comment</a>
+    <%= idea.comments.size %>
+    <div class="panel panel-default">
+      <div id="collapse<%= idea.id %>" class="panel-collapse collapse">
+        <% idea.comments.each do |comment| %>
+          <div class="comment well">
+            <div class="user">
+              "<%= comment.user.first_name %> <%= comment.user.last_name %>"
+            </div>
+            <%= comment.comment %>
+          </div>
+        <% end %>
+        <%= form_tag "/comments", method: :post do %>
+          <input type="hidden" name="idea_id" value="<%= idea.id %>">
+          <input type="hidden" name="user_id" value="<%= current_user.id %>">
+          <textarea rows="4" cols="50" name="comment">
+          </textarea>
+          <input type="submit" value="Submit">
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+<% end %>
+
+<!-- Idea Loop End -->
