@@ -31,15 +31,20 @@
 				<ul class="links">
 					<li><a href="/">Home</a></li>
 					<li><%= link_to('Edit registration', edit_user_registration_path) %></li>
-				  <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
+						<% if user_signed_in? %>
+						<li><%= link_to('Edit Profile', edit_user_registration_path) %></li>
+					  	<li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
+						<% else %>
+							<li><%= link_to('Sign Up', new_user_registration_path) %></li>
+						<% end %>
 				</ul>
 			</nav>
 
 		<!-- Banner -->
 			<section id="banner">
-				<i class="icon fa-diamond"></i>
-				<h2>Etiam adipiscing</h2>
-				<p>Magna feugiat lorem dolor egestas</p>
+				<i class="icon fa-star"></i>
+				<h2>Blackbird</h2>
+				<p>Great Ideas . Great People</p>
 				<ul class="actions">
 					<li><a href="#" class="button big special">Learn More</a></li>
 				</ul>

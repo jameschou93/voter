@@ -2,7 +2,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
   prepend_before_action :set_minimum_password_length
-  acts_as_voter
   # GET /resource/sign_up
   def new
     super
