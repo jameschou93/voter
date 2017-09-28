@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions' }
 
 
-  root to:'ideas#index'
+  root to:'ideas#index',  as: 'posts_with_button'
 
   get  "/page", to: 'pages#index'
 

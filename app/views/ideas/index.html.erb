@@ -33,7 +33,7 @@
         <%= idea.get_downvotes.size %>
       <% end %>
 
-      <%= social_share_button_tag("Share Me") %>
+      <%= social_share_button_tag("Can you solve this problem?") %>
 
 
       <a data-toggle="collapse" href="#collapse<%= idea.id %>">Comment</a>
@@ -43,7 +43,10 @@
           <% idea.comments.each do |comment| %>
             <div class="comment well">
               <div class="user">
-                "<%= comment.user.first_name %> <%= comment.user.last_name %>"
+                <div class="avatar" id="comment">
+                  <i><%=image_tag(idea.user.avatar.url(:thumb)) %></i>
+                </div>
+                <%= comment.user.first_name %> <%= comment.user.last_name %>
               </div>
               <%= comment.comment %>
             </div>

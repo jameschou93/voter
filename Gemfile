@@ -18,6 +18,8 @@ gem 'bootstrap-sass'
 gem "paperclip", "~> 5.0.0"
 # jquery
 gem 'jquery-rails'
+# paginate and infinite scroll
+gem 'will_paginate', '~> 3.0.5'
 # makes ideas voteable
 gem 'acts_as_votable', '~> 0.10.0'
 #add social media buttons
