@@ -41,14 +41,18 @@
 
     <!-- Banner -->
       <section id="banner">
-        <i class="icon fa-star"></i>
-        <h2>Blackbird</h2>
-        <p>Great Ideas . Great People</p>
+        <i class="icon fa-anchor"></i>
+        <h2>Think Tenk</h2>
+        <p>All Fish Welcome</p>
         <ul class="actions">
-          <li><a href="#" class="button big special">Learn More</a></li>
         </ul>
       </section>
-
+      <% flash.each do |name, message| %>
+      <div class="alert alert-<%= name %> alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <%= message %>
+      <% end %>
+      </div>
 <%= yield %>
     <!-- Footer -->
       <footer id="footer">

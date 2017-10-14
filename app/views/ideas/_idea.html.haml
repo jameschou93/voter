@@ -1,0 +1,42 @@
+.wrapper
+  .idea-response
+    .vote
+      = link_to like_idea_path(idea), method: :put do
+        %span{:class => "fa fa-arrow-up icon-4x"}
+        %div
+          \#{idea.get_upvotes.size}
+    .score
+      =net_score(idea)
+    .vote
+      = link_to dislike_idea_path(idea), method: :put do
+        %div
+          \#{idea.get_downvotes.size}
+        %span{:class => "fa fa-arrow-down icon-4x"}
+  .idea-content
+    #idea-name
+      =link_to "/ideas/#{idea.id}" do
+        #{idea.title}
+    #idea-descript= idea.description
+    .actions-wrapper
+      %a.btn.btn-primary{"onclick" => "myFunction('collapse#{idea.id}')", "aria-controls" => "collapse#{idea.id}", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#collapse#{idea.id}"}   comments #{idea.comments.size}
+      #idea-owner
+        -# #{idea.user.first_name} #{idea.user.last_name}
+        #{idea.created_at.strftime("%I:%M %P %b %d")}
+    %div{ :id => "collapse#{idea.id}", :class => "collapse" }
+      .comments-wrapper
+        -idea.comments.each do |comment|
+          .comment
+            #comment-user
+              -# .img-circle-comment= user_photo(:navbar, comment.user.profiles.first)
+              #{comment.user.first_name} #{comment.user.last_name}
+            #comment-body
+              #{comment.comment}
+      = form_tag "/comments", method: :post do
+        .social= social_share_button_tag("Can you solve this problem?")
+        %input{:name => "idea_id", :type => "hidden", :value => "#{idea.id}"}/
+        - if  user_signed_in?
+          .comment-input
+            %input{:name => "user_id", :type => "hidden", :value => "#{current_user.id}"}/
+            %textarea{ :placeholder => "Comment Here", :cols => "70", :name => "comment", :rows => "1"}
+            :preserve
+            %button#submit{:type => "submit"} Submit

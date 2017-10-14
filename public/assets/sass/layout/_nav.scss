@@ -13,7 +13,6 @@
 	#nav {
 		@include vendor('transform', 'translateX(20em)');
 		@include vendor('transition', ('transform #{_duration(nav)} ease', 'box-shadow #{_duration(nav)} ease', 'visibility #{_duration(nav)}'));
-		-webkit-overflow-scrolling: touch;
 		background: darken(_palette(accent2, bg), 12);
 		box-shadow: none;
 		color: _palette(accent2, fg-bold);

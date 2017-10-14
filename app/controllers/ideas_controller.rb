@@ -1,11 +1,12 @@
 class IdeasController < ApplicationController
+require 'will_paginate/array'
 
   def index
     # @ideas = Idea.all.sort_by { |idea| idea.get_downvotes.size - idea.get_upvotes.size}
-    @ideas = Idea.paginate(page: params[:page], per_page: 10).order('created_at DESC')
+    @ideas = Idea.all.sort_by { |idea| idea.get_downvotes.size - idea.get_upvotes.size}.paginate(page: params[:page], per_page: 5)
       respond_to do |format|
         format.html
-        format.js
+        format.js {render 'paginate'}
     end
     # @ideas = @ideas.sort_by { |idea| idea.get_downvotes.size - idea.get_upvotes.size}
   end
@@ -18,8 +19,14 @@ class IdeasController < ApplicationController
   end
 
   def create
-    Idea.create(title: params[:title], description: params[:description], user_id: params[:user_id])
-    redirect_to ''
+    idea = Idea.new(title: params[:title], description: params[:description], user_id: params[:user_id])
+    if idea.save
+      flash[:success] = "Thanks for contributing!"
+      redirect_to ''
+    else
+      flash[:danger] = idea.errors.full_messages
+      redirect_to ''
+    end
   end
 
   def upvote
