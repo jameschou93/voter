@@ -21,5 +21,4 @@ class ActsAsVotableMigration < ActiveRecord::Migration[5.1]
     add_index :votes, [:votable_id, :votable_type, :vote_scope]
     end
 
-
 end
