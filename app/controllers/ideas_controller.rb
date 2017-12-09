@@ -2,7 +2,11 @@ class IdeasController < ApplicationController
 require 'will_paginate/array'
 
   def index
-    # @ideas = Idea.all.sort_by { |idea| idea.get_downvotes.size - idea.get_upvotes.size}
+    if current_user
+      @user = current_user.id
+    else
+      @user = "n/a"
+    end
     @ideas = Idea.all.sort_by { |idea| idea.get_downvotes.size - idea.get_upvotes.size}.paginate(page: params[:page], per_page: 5)
       respond_to do |format|
         format.html
@@ -20,12 +24,11 @@ require 'will_paginate/array'
 
   def create
     idea = Idea.new(title: params[:title], description: params[:description], user_id: params[:user_id])
-    if idea.save
-      flash[:success] = "Thanks for contributing!"
+    if current_user
+      idea.save
       redirect_to ''
     else
-      flash[:danger] = idea.errors.full_messages
-      redirect_to ''
+      redirect_to new_user_registration_path
     end
   end
 

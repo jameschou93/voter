@@ -1,11 +1,10 @@
 .ideas-page
-  - if current_user
-    .new-idea
-      = form_tag "/ideas", method: :post do
-        %input{:name => "user_id", :type => "hidden", :value => "#{current_user.id}" }/
-        %textarea{:cols => "120", :name => "title", :rows => "1", :placeholder => "Name your idea and bring it to life!"}
-        %textarea{:cols => "120", :name => "description", :rows => "1", :placeholder => "Tell us about your idea"}
-        %input.submit{:name => "Post", :type => "submit", :value => "New Idea"}/
+  .new-idea
+    = form_tag "/ideas", method: :post do
+      %input{:name => "user_id", :type => "hidden", :value => @user }/
+      %textarea{:cols => "120", :name => "title", :rows => "1", :placeholder => "Name your idea and bring it to life!"}
+      %textarea{:cols => "120", :name => "description", :rows => "1", :placeholder => "Tell us about your idea"}
+      %input.submit{:name => "Post", :type => "submit", :value => "New Idea"}/
 
   -@ideas.each do |idea|
     =render 'idea', idea: idea
